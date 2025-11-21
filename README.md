@@ -1,73 +1,179 @@
-# Welcome to your Lovable project
+# 📝 Notion Clone - PWA
 
-## Project info
+Una aplicación moderna de organización y notas estilo Notion, construida como Progressive Web App (PWA) con React, TypeScript y TailwindCSS.
 
-**URL**: https://lovable.dev/projects/7426a7e0-df40-48f1-860f-2a6b0364a747
+## ✨ Características Actuales
 
-## How can I edit this code?
+### ✅ Implementado en v1.0
 
-There are several ways of editing your application.
+- **📄 Sistema de Páginas**: Crea páginas ilimitadas con títulos personalizables
+- **🗂️ Jerarquías**: Organiza páginas con subpáginas anidadas
+- **⭐ Favoritos**: Marca páginas importantes para acceso rápido
+- **🎨 Personalización**: 
+  - Iconos emoji personalizables
+  - Colores de portada
+  - Editor de bloques múltiples tipos
+- **✍️ Editor de Bloques**:
+  - Texto normal
+  - Títulos (H1, H2, H3)
+  - Listas con viñetas
+  - Checklists interactivos
+  - Bloques de código
+  - Comando "/" para cambiar tipos
+- **🔍 Búsqueda**: Busca en títulos y contenido de todas tus páginas
+- **💾 Persistencia Local**: Todo se guarda en localStorage
+- **📱 PWA**: 
+  - Instalable en cualquier dispositivo
+  - Funciona offline
+  - Iconos personalizados
+- **🎭 Animaciones**: Transiciones suaves con Framer Motion
+- **🎯 UI/UX Moderna**: 
+  - Diseño minimalista inspirado en Notion
+  - Panel lateral colapsable
+  - Hover effects y micro-interacciones
 
-**Use Lovable**
+## 🚀 Próximas Funcionalidades
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7426a7e0-df40-48f1-860f-2a6b0364a747) and start prompting.
+### Para v2.0 (Con Lovable Cloud)
 
-Changes made via Lovable will be committed automatically to this repo.
+- **👥 Colaboración en Tiempo Real**:
+  - Múltiples usuarios editando simultáneamente
+  - Presencia en tiempo real
+  - Cursor de colaboradores
+  - Sincronización automática
 
-**Use your preferred IDE**
+- **💾 Backend Persistente**:
+  - Sincronización en la nube
+  - Backup automático
+  - Acceso desde cualquier dispositivo
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **🔐 Autenticación**:
+  - Sistema de usuarios
+  - Permisos y roles
+  - Espacios de trabajo compartidos
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Para v3.0 (Funcionalidades Avanzadas)
 
-Follow these steps:
+- **📊 Bases de Datos**:
+  - Vista de tabla
+  - Vista Kanban
+  - Vista calendario
+  - Vista lista
+  - Propiedades personalizadas
+  - Filtros y ordenamiento
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **💬 Comunicación**:
+  - Comentarios en bloques
+  - Menciones @usuario
+  - Chat por página
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **📜 Historial**:
+  - Versiones de páginas
+  - Restaurar cambios
+  - Auditoría de cambios
 
-# Step 3: Install the necessary dependencies.
-npm i
+- **🔗 Enlaces y Referencias**:
+  - Enlaces entre páginas
+  - Backlinks automáticos
+  - Referencias bidireccionales
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+- **📤 Exportación**:
+  - PDF
+  - Markdown
+  - JSON
+
+## 🛠️ Tecnologías
+
+- **React 18** + TypeScript
+- **Vite** - Build tool
+- **TailwindCSS** - Estilos
+- **Shadcn/ui** - Componentes
+- **Framer Motion** - Animaciones
+- **Vite PWA Plugin** - Capacidades PWA
+- **Nanoid** - IDs únicos
+- **React Router** - Navegación
+
+## 📦 Instalación
+
+```bash
+# Instalar dependencias
+npm install
+
+# Desarrollo
 npm run dev
+
+# Build
+npm run build
+
+# Preview
+npm run preview
 ```
 
-**Edit a file directly in GitHub**
+## 🎨 Estructura del Proyecto
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+├── components/          # Componentes React
+│   ├── Sidebar.tsx     # Panel lateral
+│   ├── PageItem.tsx    # Item de página
+│   ├── Editor.tsx      # Editor principal
+│   ├── BlockEditor.tsx # Editor de bloques
+│   ├── EmojiPicker.tsx # Selector de emojis
+│   └── ColorPicker.tsx # Selector de colores
+├── hooks/              # Custom hooks
+│   └── usePages.ts     # Hook de gestión de páginas
+├── lib/                # Utilidades
+│   ├── storage.ts      # Persistencia localStorage
+│   └── utils.ts        # Helpers
+├── types/              # TypeScript types
+│   └── page.ts         # Tipos de Page y Block
+└── pages/              # Páginas de la app
+    └── Index.tsx       # Página principal
+```
 
-**Use GitHub Codespaces**
+## 🎯 Cómo Usar
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Crear una página**: Click en "Nueva página" en el sidebar
+2. **Editar título**: Click en el título de la página
+3. **Cambiar icono**: Click en el emoji grande
+4. **Añadir portada**: Click en "Añadir portada"
+5. **Agregar contenido**: 
+   - Escribe directamente
+   - Presiona "/" para ver comandos
+   - Enter para nuevo bloque
+   - Backspace en bloque vacío para eliminar
+6. **Organizar**: 
+   - Arrastra páginas para reordenar
+   - Click en el "+" para crear subpágina
+   - Click en la estrella para favoritos
+7. **Buscar**: Usa el buscador en el sidebar
 
-## What technologies are used for this project?
+## 💡 Comandos del Editor
 
-This project is built with:
+Presiona "/" en un bloque para ver los comandos:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Texto** - Párrafo normal
+- **Título 1** - Encabezado grande
+- **Título 2** - Encabezado mediano
+- **Título 3** - Encabezado pequeño
+- **Lista** - Lista con viñetas
+- **Checklist** - Lista de tareas
+- **Código** - Bloque de código
 
-## How can I deploy this project?
+## 🌐 PWA Features
 
-Simply open [Lovable](https://lovable.dev/projects/7426a7e0-df40-48f1-860f-2a6b0364a747) and click on Share -> Publish.
+La aplicación puede ser instalada en:
 
-## Can I connect a custom domain to my Lovable project?
+- 💻 Desktop (Chrome, Edge, Safari)
+- 📱 Android (Chrome)
+- 🍎 iOS (Safari)
 
-Yes, you can!
+### Instalar
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Visita la app en tu navegador
+2. Busca el botón "Instalar" o el icono de instalación
+3. Sigue las instrucciones del navegador
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 📄 License
+
+Este proyecto fue creado con [Lovable](https://lovable.dev)
