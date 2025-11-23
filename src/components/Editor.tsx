@@ -3,18 +3,24 @@ import { Page, Block } from '@/types/page';
 import { BlockEditor } from './BlockEditor';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Smile, Palette, Plus } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Smile, Palette, Plus, Users } from 'lucide-react';
 import { nanoid } from 'nanoid';
 import { motion } from 'framer-motion';
 import EmojiPicker from './EmojiPicker';
 import ColorPicker from './ColorPicker';
+import { cn } from '@/lib/utils';
 
 interface EditorProps {
   page: Page;
+  pages: Page[];
   onUpdate: (updates: Partial<Page>) => void;
+  onLinkClick?: (pageId: string) => void;
+  onCreatePage?: (title: string) => void;
+  collaborators?: Array<{ id: string; name: string; avatar?: string }>;
 }
 
-export const Editor = ({ page, onUpdate }: EditorProps) => {
+export const Editor = ({ page, pages, onUpdate, onLinkClick, onCreatePage, collaborators = [] }: EditorProps) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -137,24 +143,55 @@ export const Editor = ({ page, onUpdate }: EditorProps) => {
             </button>
           </div>
 
-          <div className="flex items-center gap-2 mb-6">
-            {!page.coverColor && (
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowColorPicker(!showColorPicker)}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <Palette className="w-4 h-4 mr-2" />
-                  Añadir portada
-                </Button>
-                {showColorPicker && (
-                  <div className="absolute mt-2 z-50">
-                    <ColorPicker onSelect={handleColorChange} />
-                  </div>
-                )}
-              </>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              {!page.coverColor && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowColorPicker(!showColorPicker)}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Palette className="w-4 h-4 mr-2" />
+                    Añadir portada
+                  </Button>
+                  {showColorPicker && (
+                    <div className="absolute mt-2 z-50">
+                      <ColorPicker onSelect={handleColorChange} />
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+            
+            {/* Indicador de colaboradores */}
+            {collaborators.length > 0 && (
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-muted-foreground" />
+                <div className="flex -space-x-2">
+                  {collaborators.slice(0, 3).map((collaborator) => {
+                    const initials = collaborator.name
+                      .split(' ')
+                      .map(n => n[0])
+                      .join('')
+                      .toUpperCase()
+                      .slice(0, 2);
+                    return (
+                      <Avatar key={collaborator.id} className="w-6 h-6 border-2 border-background">
+                        <AvatarFallback className="text-xs bg-accent">
+                          {initials}
+                        </AvatarFallback>
+                      </Avatar>
+                    );
+                  })}
+                  {collaborators.length > 3 && (
+                    <div className="w-6 h-6 rounded-full bg-accent border-2 border-background flex items-center justify-center text-xs font-medium">
+                      +{collaborators.length - 3}
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
           </div>
 
@@ -185,11 +222,14 @@ export const Editor = ({ page, onUpdate }: EditorProps) => {
             <BlockEditor
               key={block.id}
               block={block}
+              pages={pages}
               onUpdate={(content) => handleBlockUpdate(block.id, content)}
               onDelete={() => handleBlockDelete(block.id)}
               onTypeChange={(type) => handleBlockTypeChange(block.id, type)}
               onCheck={(checked) => handleBlockCheck(block.id, checked)}
               onEnter={() => handleAddBlock(block.id)}
+              onLinkClick={onLinkClick}
+              onCreatePage={onCreatePage}
               autoFocus={index === page.content.length - 1 && !block.content}
             />
           ))}

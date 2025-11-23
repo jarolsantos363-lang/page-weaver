@@ -13,9 +13,10 @@ export interface Page {
 
 export interface Block {
   id: string;
-  type: 'text' | 'heading1' | 'heading2' | 'heading3' | 'list' | 'checklist' | 'code';
+  type: 'text' | 'heading1' | 'heading2' | 'heading3' | 'list' | 'checklist' | 'code' | 'task' | 'note' | 'activity';
   content: string;
   checked?: boolean;
+  linkedPageId?: string; // ID de la página vinculada si es un enlace
 }
 
 export interface PageTreeItem extends Page {

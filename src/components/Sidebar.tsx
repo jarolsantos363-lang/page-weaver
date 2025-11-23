@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Page } from '@/types/page';
+import { Collaborator, CollaboratorRole } from '@/types/collaborator';
 import { PageItem } from './PageItem';
+import { CollaboratorsPanel } from './CollaboratorsPanel';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface SidebarProps {
@@ -15,6 +17,12 @@ interface SidebarProps {
   onToggleFavorite: (id: string) => void;
   onDeletePage: (id: string) => void;
   onUpdatePage: (id: string, updates: Partial<Page>) => void;
+  collaborators?: Collaborator[];
+  currentUserId?: string;
+  isAdmin?: boolean;
+  onAddCollaborator?: (name: string, email: string, role: CollaboratorRole) => void;
+  onUpdateCollaborator?: (id: string, updates: Partial<Collaborator>) => void;
+  onRemoveCollaborator?: (id: string) => void;
 }
 
 export const Sidebar = ({
@@ -25,6 +33,12 @@ export const Sidebar = ({
   onToggleFavorite,
   onDeletePage,
   onUpdatePage,
+  collaborators = [],
+  currentUserId,
+  isAdmin = false,
+  onAddCollaborator,
+  onUpdateCollaborator,
+  onRemoveCollaborator,
 }: SidebarProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedPages, setExpandedPages] = useState<Set<string>>(new Set());
@@ -182,7 +196,7 @@ export const Sidebar = ({
         </div>
       </ScrollArea>
 
-      <div className="p-2 border-t border-sidebar-border">
+      <div className="p-2 border-t border-sidebar-border space-y-2">
         <Button
           onClick={() => onCreatePage()}
           variant="ghost"
@@ -192,6 +206,17 @@ export const Sidebar = ({
           <Plus className="w-4 h-4 mr-2" />
           Nueva página
         </Button>
+        
+        {collaborators.length > 0 && currentUserId && (
+          <CollaboratorsPanel
+            collaborators={collaborators}
+            currentUserId={currentUserId}
+            isAdmin={isAdmin}
+            onAdd={onAddCollaborator || (() => {})}
+            onUpdate={onUpdateCollaborator || (() => {})}
+            onRemove={onRemoveCollaborator || (() => {})}
+          />
+        )}
       </div>
     </div>
   );
